@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <h2>SmartAttend Student</h2>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</header>
+
+<main class="dashboard">
+    <h1>Welcome, {{ session.name }}</h1>
+
+    <h2>My Attendance Report</h2>
+
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Subject Code</th>
+            <th>Total Classes</th>
+            <th>Present</th>
+            <th>Attendance Percentage</th>
+        </tr>
+
+        {% for record in records %}
+        <tr>
+            <td>{{ record.subject_name }}</td>
+            <td>{{ record.subject_code }}</td>
+            <td>{{ record.total_classes }}</td>
+            <td>{{ record.present_classes }}</td>
+            <td>{{ record.percentage }}%</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5">No attendance records available.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a class="btn" href="{{ url_for('attendance_history') }}">
+        View Attendance History
+    </a>
+</main>
+
+</body>
+</html>

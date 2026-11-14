@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <h2>SmartAttend Admin</h2>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</header>
+
+<main class="dashboard">
+    <h1>Welcome, {{ session.name }}</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <div class="stats">
+        <div class="card">
+            <h3>{{ students|length }}</h3>
+            <p>Total Students</p>
+        </div>
+
+        <div class="card">
+            <h3>{{ faculty|length }}</h3>
+            <p>Total Faculty</p>
+        </div>
+
+        <div class="card">
+            <h3>{{ subjects|length }}</h3>
+            <p>Total Subjects</p>
+        </div>
+    </div>
+
+    <section class="card">
+        <h2>Add Subject</h2>
+
+        <form method="POST" action="{{ url_for('add_subject') }}">
+            <input type="text" name="subject_name" placeholder="Subject Name" required>
+
+            <input type="text" name="subject_code" placeholder="Subject Code" required>
+
+            <select name="faculty_id">
+                <option value="">Select Faculty</option>
+                {% for member in faculty %}
+                    <option value="{{ member.id }}">{{ member.name }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Add Subject</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Student Details</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>USN</th>
+                <th>Email</th>
+                <th>Semester</th>
+                <th>Section</th>
+            </tr>
+
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.usn }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.semester }}</td>
+                <td>{{ student.section }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+
+    <section class="card">
+        <h2>Faculty Details</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+
+            {% for member in faculty %}
+            <tr>
+                <td>{{ member.name }}</td>
+                <td>{{ member.email }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+
+    <section class="card">
+        <h2>Subjects</h2>
+        <table>
+            <tr>
+                <th>Subject</th>
+                <th>Code</th>
+                <th>Assigned Faculty</th>
+            </tr>
+
+            {% for subject in subjects %}
+            <tr>
+                <td>{{ subject.subject_name }}</td>
+                <td>{{ subject.subject_code }}</td>
+                <td>{{ subject.faculty_id or 'Not assigned' }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+</main>
+
+</body>
+</html>

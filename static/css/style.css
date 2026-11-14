@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f3f6fb;
+    color: #263238;
+}
+
+.navbar {
+    background: #173b70;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.hero {
+    text-align: center;
+    padding: 90px 20px;
+    background: #dceaff;
+}
+
+.hero h1 {
+    color: #173b70;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    margin-bottom: 25px;
+}
+
+.btn,
+button {
+    display: inline-block;
+    background: #2166c2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button:hover,
+.btn:hover {
+    background: #124b94;
+}
+
+.features,
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 35px 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.features .card,
+.stats .card {
+    min-width: 220px;
+    text-align: center;
+}
+
+.card h3,
+.card h2 {
+    margin-bottom: 12px;
+}
+
+.form-container {
+    background: white;
+    width: 90%;
+    max-width: 420px;
+    margin: 65px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccd3dd;
+    border-radius: 5px;
+}
+
+.form-container button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.form-container p {
+    margin: 15px 0;
+}
+
+.dashboard {
+    padding: 30px 7%;
+}
+
+.dashboard h1,
+.dashboard h2 {
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin: 20px 0;
+}
+
+th,
+td {
+    border: 1px solid #dce1e8;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #173b70;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f0f4fa;
+}
+
+.success {
+    color: green;
+    margin: 12px 0;
+}
+
+.error {
+    color: red;
+    margin: 12px 0;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #173b70;
+    color: white;
+}
+
+@media (max-width: 650px) {
+    .navbar {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .dashboard {
+        padding: 20px 4%;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th,
+    td {
+        padding: 7px;
+    }
+}

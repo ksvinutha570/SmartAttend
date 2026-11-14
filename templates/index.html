@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartAttend</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <h2>SmartAttend</h2>
+    <nav>
+        <a href="/">Home</a>
+        <a href="{{ url_for('register') }}">Register</a>
+        <a href="{{ url_for('login') }}">Login</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Smart Student Attendance Management System</h1>
+    <p>Manage attendance digitally. Track records easily.</p>
+    <a class="btn" href="{{ url_for('login') }}">Get Started</a>
+</section>
+
+<section class="features">
+    <div class="card">
+        <h3>Admin</h3>
+        <p>Manage students, faculty and subjects.</p>
+    </div>
+
+    <div class="card">
+        <h3>Faculty</h3>
+        <p>Mark and manage student attendance.</p>
+    </div>
+
+    <div class="card">
+        <h3>Student</h3>
+        <p>View attendance and percentage.</p>
+    </div>
+</section>
+
+<footer>
+    <p>SmartAttend | Batch 2 | Section G | Lab Batch G2</p>
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

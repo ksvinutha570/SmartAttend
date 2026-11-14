@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <h2>SmartAttend Faculty</h2>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</header>
+
+<main class="dashboard">
+    <h1>Welcome, {{ session.name }}</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <h2>My Assigned Subjects</h2>
+
+    {% for subject in subjects %}
+    <div class="card">
+        <h3>{{ subject.subject_name }}</h3>
+        <p>Subject Code: {{ subject.subject_code }}</p>
+        <a class="btn" href="{{ url_for('attendance', subject_id=subject.id) }}">
+            Mark Attendance
+        </a>
+    </div>
+    {% else %}
+        <p>No subjects assigned yet. Contact the administrator.</p>
+    {% endfor %}
+
+    <h2>Registered Students</h2>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>USN</th>
+            <th>Semester</th>
+            <th>Section</th>
+        </tr>
+
+        {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.usn }}</td>
+            <td>{{ student.semester }}</td>
+            <td>{{ student.section }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</main>
+
+</body>
+</html>

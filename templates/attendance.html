@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - SmartAttend</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <h2>SmartAttend Attendance</h2>
+
+    {% if session.role == 'faculty' %}
+        <a href="{{ url_for('faculty') }}">Back</a>
+    {% else %}
+        <a href="{{ url_for('student') }}">Back</a>
+    {% endif %}
+</header>
+
+<main class="dashboard">
+
+{% if subject %}
+    <h1>Mark Attendance</h1>
+    <h3>{{ subject.subject_name }} ({{ subject.subject_code }})</h3>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+        <label for="date">Attendance Date</label>
+        <input type="date" id="date" name="date" required>
+
+        <table>
+            <tr>
+                <th>Student Name</th>
+                <th>USN</th>
+                <th>Status</th>
+            </tr>
+
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.usn }}</td>
+                <td>
+                    <select name="status_{{ student.id }}" required>
+                        <option value="">Select</option>
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                    </select>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <button type="submit">Save Attendance</button>
+    </form>
+
+{% else %}
+    <h1>My Attendance History</h1>
+
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+
+        {% for record in records %}
+        <tr>
+            <td>{{ record.subject_name }}</td>
+            <td>{{ record.date }}</td>
+            <td>{{ record.status }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">No attendance history found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+</main>
+</body>
+</html>
